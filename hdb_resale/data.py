@@ -5,8 +5,9 @@ import geopy
 import numpy as np
 import pandas as pd
 import sqlalchemy
-from airflow_submodule.hdb_resale import sql, utils
 from geopy.extra.rate_limiter import RateLimiter
+
+from hdb_resale import sql, utils
 
 # Setup logger
 logger = logging.getLogger(__name__)

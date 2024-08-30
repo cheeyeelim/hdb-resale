@@ -7,10 +7,11 @@ import re
 import numpy as np
 import pandas as pd
 import sqlalchemy
-from airflow_submodule.hdb_resale import data, sql
 from dateutil.relativedelta import relativedelta
 from dateutil.rrule import MONTHLY, rrule
 from dotenv import load_dotenv
+
+from hdb_resale import data, sql
 
 # Setup logger
 logger = logging.getLogger(__name__)

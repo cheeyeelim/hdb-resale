@@ -5,10 +5,11 @@ import logging
 import os
 
 import pandas as pd
-from airflow_submodule.hdb_resale import api, sql, utils
 from dateutil.relativedelta import relativedelta
 from dateutil.rrule import MONTHLY, rrule
 from dotenv import load_dotenv
+
+from hdb_resale import api, sql, utils
 
 # Setup logger
 logger = logging.getLogger(__name__)

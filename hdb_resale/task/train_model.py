@@ -3,9 +3,10 @@ import logging
 import os
 
 import mlflow
-from airflow_submodule.hdb_resale import data, model, sql
 from dotenv import load_dotenv
 from mlflow.models import infer_signature
+
+from hdb_resale import data, model, sql
 
 # Setup logger
 logger = logging.getLogger(__name__)
