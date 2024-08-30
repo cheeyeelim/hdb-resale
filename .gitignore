@@ -1,0 +1,64 @@
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Complexity
+output/*.html
+output/*/index.html
+
+# Virtualenvs
+env/
+.venv/
+
+# Environment variables
+.env*
+
+# Development database
+*.db
+
+# Result outputs
+results/*
+!results/.gitkeep
+
+__pycache__/
+*bin
+*h5
+*ot
+*csv
+*xlsx
+*joblib
+*zip
+outputs/
+
+# Airflow
+airflow_prd/logs/
+airflow_dev/logs/
+*pid

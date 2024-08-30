@@ -1,0 +1,94 @@
+[tool]
+[tool.poetry]
+name = "hdb_resale"
+version = "1.0.0"
+homepage = "https://www.cheeyeelim.com"
+description = "HDB Resale Analytics Package"
+authors = ["Chee Yee Lim <cheeyee.lim@gmail.com>"]
+readme = "README.md"
+packages = [
+    { include = "hdb_resale" },
+]
+
+[tool.poetry.dependencies]
+python = "~3.11"
+python-dotenv = "^1.0.0"
+psycopg2-binary = "^2.9.9"
+mlflow = "~2.13.2"
+boto3 = "~1.34.127"
+hydra-core = "^1.3.2"
+# pandas 2.2 will not work with sqlalchemy postgresql connection
+pandas = "~2.1.0"
+geopy = "^2.3.0"
+
+xgboost = "^1.7.6"
+lightgbm = "^4.0.0"
+scikit-learn = "^1.3.0"
+yellowbrick = "^1.5"
+cloudpickle = "^3.0.0"
+
+pytest  = { version = "^6.2.5", optional = true}
+WebTest  = { version = "^3.0.0", optional = true}
+factory-boy  = { version = "^3.2.0", optional = true}
+pdbpp  = { version = "^0.10.3", optional = true}
+
+black  = { version = "^21.12b0", optional = true}
+isort  = { version = "^5.10.1", optional = true}
+flake8  = { version = "^4.0.1", optional = true}
+flake8-docstrings = { version = "^1.6.0", optional = true }
+flake8-blind-except = { version = "^0.2.0", optional = true }
+flake8-debugger = { version = "^4.0.0", optional = true }
+flake8-isort = { version = "^4.1.1", optional = true }
+pep8-naming = { version = "^0.12.1", optional = true }
+ipykernel = { version = "^6.29.2", optional = true }
+pre-commit = { version = "^3.6.1", optional = true }
+
+[tool.poetry.extras]
+test = [
+    "pytest",
+    "WebTest",
+    "factory-boy",
+    "pdbpp"
+    ]
+
+dev = [
+    "black",
+    "isort",
+    "flake8",
+    "flake8-docstrings",
+    "flake8-blind-except",
+    "flake8-debugger",
+    "flake8-isort",
+    "pep8-naming",
+    "ipykernel",
+    "pre-commit"
+    ]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 120
+skip_gitignore = true
+# you can skip files as below
+#skip_glob = docs/conf.py
+
+
+[tool.black]
+line-length = 120
+skip-string-normalization = true
+target-version = ['py39']
+include = '\.pyi?$'
+exclude = '''
+/(
+  | \.git
+  | _build
+)/
+'''
