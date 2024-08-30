@@ -1,1 +1,1 @@
-"""hdb_resale submodule."""
+"""hdb_resale module."""
