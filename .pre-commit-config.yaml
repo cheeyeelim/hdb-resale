@@ -10,6 +10,7 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-merge-conflict
+      - id: check-toml
       - id: check-yaml
         args: [ --unsafe ]
   - repo: https://github.com/pre-commit/mirrors-isort
@@ -32,3 +33,7 @@ repos:
     rev: 0.6.0
     hooks:
       - id: nbstripout
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.16.1
+    hooks:
+      - id: gitleaks
