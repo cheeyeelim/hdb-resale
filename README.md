@@ -14,7 +14,7 @@
 
 Code repository that handles data retrieval, processing and model training for HDB resale analytics.
 
-It is intends to be installed as a package to power both the backend (i.e. Airflow pipeline) and the frontend (i.e. Dash).
+It is intended to be installed as a package to power both the backend (i.e. Airflow pipeline) and the frontend (i.e. Dash) for HDB resale analytics tool.
 
 # How to Deploy
 
