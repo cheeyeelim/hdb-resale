@@ -22,7 +22,9 @@ It is intended to be installed as a package to power both the backend (i.e. Airf
    1. `git add .`
    2. `git commit -m "{commit message}"`
    3. `git push`
-2. All done!
+2. Go to other projects/repos that require this package and install as dependency.
+   1. `poetry add git+https://github.com/cheeyeelim/hdb-resale.git`
+3. All done!
 
 # How to Develop
 
@@ -34,5 +36,26 @@ It is intended to be installed as a package to power both the backend (i.e. Airf
 3. Continue to develop!
 
 # Project Folder Structure
+
+├── .env                            # environment variables
+├── .gitignore
+├── .pre-commit-config.yaml         # config for pre-commit
+├── README.md
+├── conf                            # hydra config for development purpose
+│   └── hdb_resale_config.yaml
+├── hdb_resale                      # hdb_resale module
+│   ├── __init__.py
+│   ├── api.py
+│   ├── data.py
+│   ├── model.py                    # ML models
+│   ├── sql.py                      # data models
+│   ├── task                        # task submodule containing all Airflow tasks
+│   └── utils.py
+├── notebooks                       # notebook for development purpose
+│   └── hdb_resale
+├── poetry.lock                     # poetry resolved Python dependencies
+├── poetry.toml                     # config for poetry
+├── pyproject.toml                  # config for poetry & Python dependencies
+└── setup.cfg
 
 # Other Information

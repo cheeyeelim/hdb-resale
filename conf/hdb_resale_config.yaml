@@ -1,0 +1,87 @@
+job_name: hdb_resale_data_etl
+
+# Run parameters
+run:
+  # Whether to run(True) / skip(False) the task
+  task_toggle:
+    get_data: False
+    process_data: False
+    train_model: True
+  # full or delta to decide whether to download full or part of the data
+  run_mode: delta
+  # Only for delta run, how many past N months to cover from this month
+  # If this month is Mar and past_n_mth = 3, then Jan-Mar will be covered
+  past_n_mth: 3
+
+# Database parameters
+database:
+  source_data:
+    schema_name: hdb_resale
+    table_name: source_data
+    schema_table_name: ${database.source_data.schema_name}.${database.source_data.table_name}
+    # NOTE it is unable to uniquely identify a flat without using _id provided,
+    # as it is possible for many flats to share the exact same characteristics captured here
+    hash_key_columns: [
+      "_id", "month", "town",
+      "flat_type", "block", "street_name",
+      "storey_range", "floor_area_sqm",
+      "flat_model", "lease_commence_date",
+      "resale_price"
+    ]
+  town_data:
+    schema_name: hdb_resale
+    table_name: town_data
+    schema_table_name: ${database.town_data.schema_name}.${database.town_data.table_name}
+    hash_key_columns: [
+      "town", "census_mapping", "source_name"
+    ]
+  address_data:
+    schema_name: hdb_resale
+    table_name: address_data
+    schema_table_name: ${database.address_data.schema_name}.${database.address_data.table_name}
+    hash_key_columns: [
+      "block", "street_name", "town",
+      "source_name"
+    ]
+  master_data:
+    schema_name: hdb_resale
+    table_name: master_data
+    schema_table_name: ${database.master_data.schema_name}.${database.master_data.table_name}
+    # master_data should reuse hash key from source_data
+    hash_key_columns: []
+
+# API parameters
+# Documentation on SG Gov Data API at https://guide.data.gov.sg/developer-guide/api-overview.
+# Get data source id from https://beta.data.gov.sg/collections/189/datasets/d_8b84c4ee58e3cfc0ece0d773c8ca6abc/view.
+api:
+  base_url: "https://data.gov.sg/api/action/datastore_search"
+  data_source_id: d_8b84c4ee58e3cfc0ece0d773c8ca6abc
+  formatted_url: ${api.base_url}?resource_id=${api.data_source_id}
+  limit: 100 # following default of the API
+  query_sleep_offset: 0.01 # Number of seconds to pause before each query. To prevent DDoS the endpoint.
+
+# Model training/prediction parameters
+model:
+  # Temporary local paths to store outputs inside container. Need to manually move results.
+  output_path:
+    model: "./models/multreeens_model.joblib"
+    diagnostic: "./models"
+  random_state: 6
+  colnames_selection:
+    x: [
+      "year", "month", "flat_type_value", "min_storey_range",
+      "remaining_lease", "floor_area_sqm", "lat", "lng",
+      "pct_population_below24", "pct_population_2559", "pct_population_above60",
+      "pct_hdb", "pct_condo", "pct_landed",
+      "pct_income_below4k", "pct_income_4k8k", "pct_income_8k12k",
+      "pct_income_above12k", "pct_household_withdisability"
+    ]
+    y: "resale_price"
+  flat_type_mapping:
+      "1 ROOM": 1
+      "2 ROOM": 2
+      "3 ROOM": 3
+      "4 ROOM": 4
+      "5 ROOM": 5
+      "EXECUTIVE": 6
+      "MULTI-GENERATION": 7
